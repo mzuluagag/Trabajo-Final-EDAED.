@@ -1,10 +1,82 @@
 ---
 title: "Trabajo Final"
-author: "Mateo Zuluaga Giraldo id 1045026217"
 date: "8 de noviembre de 2017"
 output: html_document
 ---
-
+<h3>Autores</h3>
+<ul>
+  <li>Mateo Zuluaga <br> ID. 1045026217</li>
+  <li>Brahian G?mez <br> ID. 1041234487</li>
+  <li>Andr?s Acosta <br> ID. 1026154354</li>
+  <li>Jose Toquica <br> ID. 1020450656</li>
+</ul>
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r}
+library(dplyr)
+
+db1 <- read.csv("Mateo_Zuluaga_1_7m_110m_87s.csv")
+db1 <- db1 %>%
+  mutate(fecha = as.POSIXct(timestamp/1000, origin = "1970-01-01"))#transformación de la variable tiempo
+
+library(ggplot2)
+ggplot(db1, aes(fecha, AccX)) + #gráfica eje x
+  geom_line()
+
+library(ggplot2)
+ggplot(db1, aes(fecha, AccY)) + #gráfica eje y
+  geom_line()
+
+library(ggplot2)
+ggplot(db1, aes(fecha, AccZ)) + #gráfica eje z
+  geom_line()
+
+summary(db1)
+```
+```{r}
+library(dplyr)
+db1_2 <- db1 %>%
+  mutate(tiempo = timestamp %/% 100) %>%
+  group_by(tiempo) %>%
+  summarise(AccX = mean(AccX, na.rm = TRUE),
+            AccY = mean(AccY, na.rm = TRUE),
+            AccZ = mean(AccZ, na.rm = TRUE)) #cálculo de la aceleración promedio por décimas de segundo
+matplot(db1_2$tiempo, db1_2[, 2:4], type = "l") #gráfica conjunta por décimas de segundo
+```
+```{r}
+library(dplyr)
+db1_2 <- db1_2 %>%
+            mutate(accT = sqrt(AccX ^ 2 + AccY ^ 2 + AccZ ^ 2)) #cálculo de la aceleración total
+library(ggplot2)
+ggplot(db1_2, aes(tiempo, accT)) + geom_line()
+```
+```{r}
+diff(db1_2$tiempo) #verificación de cambios en periodos de tiempo
+cambios <- which(diff(db1_2$tiempo) != 1)
+
+cambios
+db1_s1 <- db1_2[1:cambios[1], ] #Selección de un segmento “completo”
+ggplot(db1_s1, aes(tiempo, accT)) + geom_line() #Gráfica de la aceleración total en un segmento de tiempo.
+```
+```{r}
+spec1_s1 <- spec.pgram(db1_s1$accT, las = 1) #Periodograma
+maxFrec1_s1 <- spec1_s1$freq[which(spec1_s1$spec == max(spec1_s1$spec))] #Selección de la frecuencia con el valor máximo del espectro.
+maxFrec1_s1
+
+tiempoS1 <- diff(range(db1_s1$tiempo)) #Cálculo del tiempo total y números de periodos.
+numPeriodos <- tiempoS1 * maxFrec1_s1 
+
+tiempoS1
+numPeriodos
+```
+```{r}
+distancia1 <- 110
+longPaso1_s1 <- 110/numPeriodos #Cálculo de la longitud del paso
+longPaso1_s1
+```
+```{r}
+db1_s2 <- db1_2[cambios[13]:cambios[14]]
+```
+
+
