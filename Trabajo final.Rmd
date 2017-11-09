@@ -1,0 +1,10 @@
+---
+title: "Trabajo Final"
+author: "Mateo Zuluaga Giraldo id 1045026217"
+date: "8 de noviembre de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
