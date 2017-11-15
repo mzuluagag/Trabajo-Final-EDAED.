@@ -15,50 +15,44 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-db1 <- read.csv("Mateo_Zuluaga_1_7m_110m_87s.csv")
-distancia <- 110
-```
 
-```{r}
+library(xlsx)
 library(dplyr)
-db1 <- db1 %>%
+
+datos <- read.xlsx("datos.xlsx",1)
+
+
+for (i in 1:2){
+  
+  dbb <- paste(paste(datos[i,"nombre_base_datos"]),".csv", sep = "")
+  db <- read.csv(dbb)
+
+
+distancia <- datos[i,'distancia']
+db <- db %>%
         mutate(fecha= as.POSIXct(timestamp/1000, origin = "1970-01-01"))
-db1_1 <- db1 %>%
+db_1 <- db %>%
   mutate(tiempo = timestamp %/% 100) %>%
   group_by(tiempo) %>%
   summarise(AccX = mean(AccX, na.rm = TRUE),
             AccY = mean(AccY, na.rm = TRUE),
             AccZ = mean(AccZ, na.rm = TRUE))
-db1_1 <- db1_1 %>%
+db_1 <- db_1 %>%
             mutate(accT = sqrt(AccX ^ 2 + AccY ^ 2 + AccZ ^ 2))
-```
 
-```{r}
-library(ggplot2)
-ggplot(db1_1, aes(tiempo, accT)) + geom_line()
-```
+db_1 <- db_1 %>% filter(!is.na(accT))
+spec2 <- spec.pgram(db_1$accT, las = 1)
 
-```{r}
-db1_1 <- db1_1 %>% filter(!is.na(accT))
-spec2 <- spec.pgram(db1_1$accT, las = 1)
-```
-
-```{r}
 maxFrec <- spec2$freq[which(spec2$spec == max(spec2$spec))]
-maxFrec
+
+
+tiempoTotal_db <- db$fecha[nrow(db)] - db$fecha[1]
+as.vector(tiempoTotal_db) * 600
+
+as.vector(tiempoTotal_db) * 600 * maxFrec
+
+longPaso2 <- distancia/(as.vector(tiempoTotal_db) * 600 * maxFrec)
+longPaso2
+datos[i,"long_paso_c"] <- longPaso2
+}
 ```
-
-```{r}
-tiempoTotal_db1 <- db1$fecha[nrow(db1)] - db1$fecha[1]
-as.vector(tiempoTotal_db1) * 600
-```
-
-```{r}
-as.vector(tiempoTotal_db1) * 600 * maxFrec
-```
-
-```{r}
-(longPaso2 <- distancia/(as.vector(tiempoTotal_db1) * 600 * maxFrec))
-```
-
-
