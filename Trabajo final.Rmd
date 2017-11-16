@@ -15,7 +15,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, include=FALSE}
 
 #INFORMACIÓN IMPORTANTE: DB1 Y DB4 Son copias de DB2, las originales están malas.
 
@@ -63,5 +63,17 @@ tiempoTotal_db <- difftime(db$fecha[nrow(db)], db$fecha[1], units='mins')
 longPaso2 <- distancia/(as.vector(tiempoTotal_db) * 600 * maxFrec)
 longPaso2
 datos[i,"long_paso_c"] <- longPaso2
+
 }
+
+write.xlsx(datos, "./mydata.xlsx")
+
 ```
+```{r echo=FALSE}
+summary(datos['lps.lpc'])
+```
+
+
+
+
+
