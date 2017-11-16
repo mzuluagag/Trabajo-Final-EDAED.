@@ -25,7 +25,7 @@ library(dplyr)
 datos <- read.xlsx("datos.xlsx",1)
 
 cantidad_dbs <- length(as.vector(datos[,1])) #Valor dinamico dbs.
-print(cantidad_dbs)#DEBUGGER
+#print(cantidad_dbs)#DEBUGGER
 
 # ./databases/ <-
 
@@ -33,7 +33,7 @@ print(cantidad_dbs)#DEBUGGER
 for (i in 1:cantidad_dbs){
   
   dbb <- paste(datos[i,"nombre_base_datos"],".csv", sep = "")
-  print(paste('./databases/', dbb , sep="")) #DEBUGGER
+ # print(paste('./databases/', dbb , sep="")) #DEBUGGER
   db <- read.csv(paste('./databases/', dbb , sep=""))
   
   
@@ -58,7 +58,7 @@ maxFrec <- spec2$freq[which(spec2$spec == max(spec2$spec))]
 
 tiempoTotal_db <- difftime(db$fecha[nrow(db)], db$fecha[1], units='mins')
 
-print(tiempoTotal_db)#DEBUGGER
+#print(tiempoTotal_db)#DEBUGGER
 
 longPaso2 <- distancia/(as.vector(tiempoTotal_db) * 600 * maxFrec)
 longPaso2
