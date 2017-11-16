@@ -17,20 +17,28 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r echo=FALSE}
 
+#INFORMACIÓN IMPORTANTE: DB1 Y DB4 Son copias de DB2, las originales están malas.
+
 library(xlsx)
 library(dplyr)
 
-
 datos <- read.xlsx("datos.xlsx",1)
 
+cantidad_dbs <- length(as.vector(datos[,1])) #Valor dinamico dbs.
+print(cantidad_dbs)#DEBUGGER
 
-for (i in 1:2){
+# ./databases/ <-
+
+
+for (i in 1:cantidad_dbs){
   
-  dbb <- paste(paste(datos[i,"nombre_base_datos"]),".csv", sep = "")
-  db <- read.csv(dbb)
-
-
+  dbb <- paste(datos[i,"nombre_base_datos"],".csv", sep = "")
+  print(paste('./databases/', dbb , sep="")) #DEBUGGER
+  db <- read.csv(paste('./databases/', dbb , sep=""))
+  
+  
 distancia <- datos[i,'distancia']
+
 db <- db %>%
         mutate(fecha= as.POSIXct(timestamp/1000, origin = "1970-01-01"))
 db_1 <- db %>%
@@ -43,62 +51,17 @@ db_1 <- db_1 %>%
             mutate(accT = sqrt(AccX ^ 2 + AccY ^ 2 + AccZ ^ 2))
 
 db_1 <- db_1 %>% filter(!is.na(accT))
-spec2 <- spec.pgram(db_1$accT, las = 1)
+spec2 <- spec.pgram(db_1$accT, las = 1, plot=FALSE)
 
 maxFrec <- spec2$freq[which(spec2$spec == max(spec2$spec))]
 
 
-tiempoTotal_db <- db$fecha[nrow(db)] - db$fecha[1]
-as.vector(tiempoTotal_db) * 600
+tiempoTotal_db <- difftime(db$fecha[nrow(db)], db$fecha[1], units='mins')
 
-as.vector(tiempoTotal_db) * 600 * maxFrec
+print(tiempoTotal_db)#DEBUGGER
 
 longPaso2 <- distancia/(as.vector(tiempoTotal_db) * 600 * maxFrec)
 longPaso2
 datos[i,"long_paso_c"] <- longPaso2
 }
-```
-
-```{r}
-
-library(xlsx)
-library(dplyr)
-
-datos <- read.xlsx("datos.xlsx",1)
-
-
-for (i in 1:2){
-  
-  dbb <- paste(paste(datos[i,"nombre_base_datos"]),".csv", sep = "")
-  db <- read.csv(dbb)
-
-
-distancia <- datos[i,'distancia']
-db <- db %>%
-        mutate(fecha= as.POSIXct(timestamp/1000, origin = "1970-01-01"))
-db_1 <- db %>%
-  mutate(tiempo = timestamp %/% 100) %>%
-  group_by(tiempo) %>%
-  summarise(AccX = mean(AccX, na.rm = TRUE),
-            AccY = mean(AccY, na.rm = TRUE),
-            AccZ = mean(AccZ, na.rm = TRUE))
-db_1 <- db_1 %>%
-            mutate(accT = sqrt(AccX ^ 2 + AccY ^ 2 + AccZ ^ 2))
-
-db_1 <- db_1 %>% filter(!is.na(accT))
-spec2 <- spec.pgram(db_1$accT, las = 1)
-
-maxFrec <- spec2$freq[which(spec2$spec == max(spec2$spec))]
-
-
-tiempoTotal_db <- db$fecha[nrow(db)] - db$fecha[1]
-as.vector(tiempoTotal_db) * 600
-
-as.vector(tiempoTotal_db) * 600 * maxFrec
-
-longPaso2 <- distancia/(as.vector(tiempoTotal_db) * 600 * maxFrec)
-longPaso2
-datos[i,"long_paso_c"] <- longPaso2
-}
-
 ```
