@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ---
 title: "Trabajo Final"
 date: "8 de noviembre de 2017"
@@ -7,15 +7,15 @@ output: html_document
 <h3>Autores</h3>
 <ul>
   <li>Mateo Zuluaga <br> ID. 1045026217</li>
-  <li>Brahian G?mez <br> ID. 1041234487</li>
-  <li>Andr?s Acosta <br> ID. 1026154354</li>
+  <li>Brahian Gómez <br> ID. 1041234487</li>
+  <li>Andrés Acosta <br> ID. 1026154354</li>
   <li>Jose Toquica <br> ID. 1020450656</li>
 </ul>
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r echo=FALSE}
 
 library(xlsx)
 library(dplyr)
@@ -57,21 +57,6 @@ longPaso2 <- distancia/(as.vector(tiempoTotal_db) * 600 * maxFrec)
 longPaso2
 datos[i,"long_paso_c"] <- longPaso2
 }
-=======
----
-title: "Trabajo Final"
-date: "8 de noviembre de 2017"
-output: html_document
----
-<h3>Autores</h3>
-<ul>
-  <li>Mateo Zuluaga <br> ID. 1045026217</li>
-  <li>Brahian G?mez <br> ID. 1041234487</li>
-  <li>Andr?s Acosta <br> ID. 1026154354</li>
-  <li>Jose Toquica <br> ID. 1020450656</li>
-</ul>
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
@@ -115,5 +100,5 @@ longPaso2 <- distancia/(as.vector(tiempoTotal_db) * 600 * maxFrec)
 longPaso2
 datos[i,"long_paso_c"] <- longPaso2
 }
->>>>>>> bc22c8ec04dd2f6d5db6ae2f022dd7b9d8dd44bf
+
 ```
