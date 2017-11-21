@@ -65,16 +65,43 @@ datos[i,"long_paso_c"] <- longPaso2
 write.xlsx(datos, "./mydata.xlsx")
 
 ```
+
+
 ```{r echo=FALSE}
-summary(datos['lps.lpc'])
+summary(datos['lpr.lpc'])
 ```
 <p>
 Este es un resumen de la variable longitud_de_paso_real / longitud_de_paso_calulado, en el que se ve que estos datos se centran en la media, que es un valor muy cercano a 1, de lo que se puede concluir que que la longitud real y la calculada son dos valores muy parecidos, lo cual nos da pie a concluir que el calculo de la longitud del paso es bastante preciso, de hecho se pudo observar y concluir que el error se da principalmente por error de las personas al contar los pasos.
 </p>
 ```{r echo=FALSE}
-summary(datos['est.lpc'])
+library(ggplot2)
+library(grid)
+library(gridExtra)
+library(dplyr) 
+
+summary(datos['est.lpc'] )
+
+lapply(split(subset(datos, select = est.lpc), datos$genero), summary)
+
 ```
 
+```{r}
+library(ggplot2)
+library(dplyr) 
+ggplot(datos, aes(long_paso_c, estatura))+
+  geom_jitter(width = 0.0001, height = 0.0001)+ 
+  geom_smooth(method = lm)+
+  labs(x = "Longitud de paso calculada", y = "Estatura")
+```
+
+```{r}
+library(ggplot2)
+library(dplyr) 
+ggplot(datos, aes(est.lpc, genero))+
+  geom_jitter(width = 0.1, height = 0.1)+ 
+  geom_smooth(method = lm)+
+  labs(x = "Estatura / Longitud de paso calculada", y = "Génere")
+```
 
 <h4>
 Referencias

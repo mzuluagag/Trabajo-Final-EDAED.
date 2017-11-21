@@ -144,7 +144,7 @@ Relación entre la longitud del paso la estatura
 <p>
 El siguiente, es un trabajo estadístico, en el que mediante la aplicación “Science Journal” disponible para dispositivos moviles con sistema operativo Android, se puede medir la aceleración en los ejes X, Y y Z del terminal, además de otras mediciones, el experimento consiste en tomar una muestra de personas, que para este trabajo, fueron 65 y se les preguntaba su estatura y género y se les pedia caminar con la teléfono en la mano con la aplicación encendida, a lo largo de una distancia previamente medida, las personas además debían contar el número de pasos que daban.</br>Cada conjunto de datos se exporta en formato .csv y con R se saca la longitud del paso de cada persona, esta longitud corresponde a la longitud calculada, también se tiene la longitud de paso real, que es la división de la distancia y el número de pasos que dio la persona, más abájo se analiza este resultado.</br> Pero el objetivo principal, es analizar la relación que tiene la estatura de la persona con su longitud de paso calculada discriminado por género, que intiutivamente se pensaría que esta relación es directamente proporcional, es decir que a mayor estatura, mayor será la longitud del paso, hipótesis que se consolidará a continuación.
 </p>
-<pre><code>##     lps.lpc      
+<pre><code>##     lpr.lpc      
 ##  Min.   :0.9558  
 ##  1st Qu.:1.0456  
 ##  Median :1.0833  
@@ -160,6 +160,23 @@ Este es un resumen de la variable longitud_de_paso_real / longitud_de_paso_calul
 ##  Median :2.428  
 ##  Mean   :2.434  
 ##  3rd Qu.:2.565  
+##  Max.   :2.907</code></pre>
+<pre><code>## $f
+##     est.lpc     
+##  Min.   :2.175  
+##  1st Qu.:2.299  
+##  Median :2.424  
+##  Mean   :2.404  
+##  3rd Qu.:2.487  
+##  Max.   :2.793  
+## 
+## $m
+##     est.lpc     
+##  Min.   :2.021  
+##  1st Qu.:2.337  
+##  Median :2.475  
+##  Mean   :2.448  
+##  3rd Qu.:2.580  
 ##  Max.   :2.907</code></pre>
 <h4>
 Referencias
