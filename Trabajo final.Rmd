@@ -83,13 +83,13 @@ library(grid)
 library(gridExtra)
 library(dplyr) 
 
-summary(datos['est.lpc'] )
+summary(datos['lpc.est'] )
 
-lapply(split(subset(datos, select = est.lpc), datos$genero), summary)
+lapply(split(subset(datos, select = lpc.est), datos$genero), summary)
 
 ```
 <p>
-Estos 3 resúmenes, se hicieron sobre una variable calculada, que es la estatura dividido la longitud del paso calculado, la primera se hizo a toda la base de datos, donde para las 62 personas se puede observar que se obtiene un valor para la media de 2,434 con un máximo de 2,907 y un mínimo de 2,021, de donde se observa, que hay cierta relación, y que para todo el tamaño de muestra, ningún valor baja de 2 ni sube de 3.</br> Los dos siguientes resúmenes, se hicieron separando la población femenina (20) de la masculina (42) y se puede ver que los dos valores extremos provienen de la población masculina y que en las mujeres, el intervalo se acorta bastante.
+Estos 3 resúmenes, se hicieron sobre una variable calculada, que es la longitud del paso calculada dividido la estatura, la primera se hizo a toda la base de datos, donde para las 62 personas se puede observar que se obtiene un valor para la media de 0.4132 con un máximo de 0.4948 y un mínimo de 0.3440, de donde se observa, que hay cierta relación.</br> Los dos siguientes resúmenes, se hicieron separando la población femenina (20) de la masculina (42) y se puede ver que los dos valores extremos provienen de la población masculina y que en las mujeres, el intervalo se acorta bastante.
 </p>
 ```{r echo=FALSE}
 library(ggplot2)
@@ -100,15 +100,15 @@ ggplot(datos, aes(long_paso_c, estatura))+
   labs(x = "Longitud de paso calculada", y = "Estatura")
 ```
 <p>
-Acá tenesmo una gráfica de la longitud de paso contra la estatura, donde a simple vista no se puede notar el creciemiento, pero con la linea de dispersión se ve claramente que a medida de que la estatura tiene a subir, la longitud del paso tambieén tiende a aumentar.
+Acá se tiene una gráfica de la longitud de paso contra la estatura, donde a simple vista no se puede notar el creciemiento, pero con la linea de dispersión se ve claramente que a medida de que la estatura tiene a subir, la longitud del paso tambieén tiende a aumentar.
 </p>
 ```{r echo=FALSE}
 library(ggplot2)
 library(dplyr) 
-ggplot(datos, aes(est.lpc, genero))+
-  geom_jitter(width = 0.001, height = 0.001)+ 
+ggplot(datos, aes(lpc.est, genero))+
+  geom_jitter(width = 0.01, height = 0.01)+ 
   geom_smooth(method = lm)+
-  labs(x = "Estatura / Longitud de paso calculada", y = "Génere")
+  labs(x = "Longitud de paso calculada / Estatura", y = "Génere")
 ```
 <p>
 Con esta gráfica de la varieble calculada estatura dividido longitud de paso, se termina de evidenciar que la relación entre la estatura y la longitud del paso es un poco más estrecha en las mujeres.
