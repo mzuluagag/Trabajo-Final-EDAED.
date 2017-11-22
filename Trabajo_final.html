@@ -142,42 +142,26 @@ Jose Toquica <br> ID. 1020450656
 Relación entre la longitud del paso la estatura
 </h3>
 <p>
-El siguiente, es un trabajo estadístico, en el que mediante la aplicación “Science Journal” disponible para dispositivos moviles con sistema operativo Android, se puede medir la aceleración en los ejes X, Y y Z del terminal, además de otras mediciones, el experimento consiste en tomar una muestra de personas, que para este trabajo, fueron 65 y se les preguntaba su estatura y género y se les pedia caminar con la teléfono en la mano con la aplicación encendida, a lo largo de una distancia previamente medida, las personas además debían contar el número de pasos que daban.</br>Cada conjunto de datos se exporta en formato .csv y con R se saca la longitud del paso de cada persona, esta longitud corresponde a la longitud calculada, también se tiene la longitud de paso real, que es la división de la distancia y el número de pasos que dio la persona, más abájo se analiza este resultado.</br> Pero el objetivo principal, es analizar la relación que tiene la estatura de la persona con su longitud de paso calculada discriminado por género, que intiutivamente se pensaría que esta relación es directamente proporcional, es decir que a mayor estatura, mayor será la longitud del paso, hipótesis que se consolidará a continuación.
+El siguiente, es un trabajo estadístico, en el que mediante la aplicación “Science Journal” disponible para dispositivos moviles con sistema operativo Android, se puede medir la aceleración en los ejes X, Y y Z del terminal, además de otras mediciones, el experimento consiste en tomar una muestra de personas, que para este trabajo, fueron 62 y se les preguntaba su estatura y género y se les pedia caminar con la teléfono en la mano con la aplicación encendida, a lo largo de una distancia previamente medida, las personas además debían contar el número de pasos que daban.</br>Cada conjunto de datos se exporta en formato .csv y con R se saca la longitud del paso de cada persona, esta longitud corresponde a la longitud calculada, también se tiene la longitud de paso real, que es la división de la distancia y el número de pasos que dio la persona, más abájo se analiza este resultado.</br> Pero el objetivo principal, es analizar la relación que tiene la estatura de la persona con su longitud de paso calculada discriminado por género, que intiutivamente se pensaría que esta relación es directamente proporcional, es decir que a mayor estatura, mayor será la longitud del paso, hipótesis que se consolidará a continuación.
 </p>
-<pre><code>##     lpr.lpc      
-##  Min.   :0.9558  
-##  1st Qu.:1.0456  
-##  Median :1.0833  
-##  Mean   :1.0907  
-##  3rd Qu.:1.1192  
-##  Max.   :1.2783</code></pre>
 <p>
 Este es un resumen de la variable longitud_de_paso_real / longitud_de_paso_calulado, en el que se ve que estos datos se centran en la media, que es un valor muy cercano a 1, de lo que se puede concluir que que la longitud real y la calculada son dos valores muy parecidos, lo cual nos da pie a concluir que el calculo de la longitud del paso es bastante preciso, de hecho se pudo observar y concluir que el error se da principalmente por error de las personas al contar los pasos.
 </p>
-<pre><code>##     est.lpc     
-##  Min.   :2.021  
-##  1st Qu.:2.302  
-##  Median :2.428  
-##  Mean   :2.434  
-##  3rd Qu.:2.565  
-##  Max.   :2.907</code></pre>
-<pre><code>## $f
-##     est.lpc     
-##  Min.   :2.175  
-##  1st Qu.:2.299  
-##  Median :2.424  
-##  Mean   :2.404  
-##  3rd Qu.:2.487  
-##  Max.   :2.793  
-## 
-## $m
-##     est.lpc     
-##  Min.   :2.021  
-##  1st Qu.:2.337  
-##  Median :2.475  
-##  Mean   :2.448  
-##  3rd Qu.:2.580  
-##  Max.   :2.907</code></pre>
+<p>
+Estos 3 resúmenes, se hicieron sobre una variable calculada, que es la estatura dividido la longitud del paso calculado, la primera se hizo a toda la base de datos, donde para las 62 personas se puede observar que se obtiene un valor para la media de 2,434 con un máximo de 2,907 y un mínimo de 2,021, de donde se observa, que hay cierta relación, y que para todo el tamaño de muestra, ningún valor baja de 2 ni sube de 3.</br> Los dos siguientes resúmenes, se hicieron separando la población femenina (20) de la masculina (42) y se puede ver que los dos valores extremos provienen de la población masculina y que en las mujeres, el intervalo se acorta bastante.
+</p>
+<p>
+Acá tenesmo una gráfica de la longitud de paso contra la estatura, donde a simple vista no se puede notar el creciemiento, pero con la linea de dispersión se ve claramente que a medida de que la estatura tiene a subir, la longitud del paso tambieén tiende a aumentar.
+</p>
+<p>
+Con esta gráfica de la varieble calculada estatura dividido longitud de paso, se termina de evidenciar que la relación entre la estatura y la longitud del paso es un poco más estrecha en las mujeres.
+</p>
+<h4>
+Conclusiones
+</h4>
+<p>
+El anterior fue un experimento con un tamaño de muestra pequeño, donde se vio un alto grado de relación entre la longitud de paso y la estatura, pero se debería realizar un un tamaño de muestra más grande y con una población más variada, ya que los datos se tomaron dentro del campus de la universidad, donde la mayoría de las personas con jovenes y la totalidad llevaban un bolso, lo que puede hacer que los datos se sesguen, así que se recomienda hacer una ampliación y diversificación de la población objetivo.
+</p>
 <h4>
 Referencias
 </h4>
