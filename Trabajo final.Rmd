@@ -64,6 +64,10 @@ datos[i,"long_paso_c"] <- longPaso2
 
 write.xlsx(datos, "./mydata.xlsx")
 
+(mediaLongPasos <- mean(c(datos[,'long_paso_c'])))
+(desvestPasos <- sd(c(datos[,'long_paso_c'])))
+
+
 ```
 
 
